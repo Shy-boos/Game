@@ -90,7 +90,7 @@ function control() {
     }
   }
 
-  function colision(Xmin, Xmax, Ymin, Ymax) {
+  function colision(Xmin, Ymin,Xmax, Ymax) {
     if (Xmax > mouseX && Xmin < mouseX) {
       if (Ymax > mouseY && Ymin < mouseY) {
         return true;
