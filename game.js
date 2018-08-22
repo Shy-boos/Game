@@ -1,13 +1,12 @@
 var buttons = [];
-
 var wojsko;
 
 function setup() {
-  wojsko = new kropek();
   //createCanvas(window.innerWidth, window.innerHeight);
   createCanvas(800, 800);
   background(0);
   fill(255);
+  wojsko = new kropek();
   var x = 40;
   class button {
     constructor(x, y, w, h) {
@@ -71,27 +70,27 @@ function control() {
       buttons[i].active = true;
 
       if (i == 0) {
-        wojsko.x = wojsko.x - 1;
+        wojsko.x = wojsko.x + 1;
         wojsko.y = wojsko.y - 1;
       } else if (i == 1) {
         wojsko.y = wojsko.y - 1;
       } else if (i == 2) {
-        wojsko.x = wojsko.x + 1;
+        wojsko.x = wojsko.x - 1;
         wojsko.y = wojsko.y - 1;
       } else if (i == 3) {
-        wojsko.x = wojsko.x - 1;
+        wojsko.x = wojsko.x + 1;
       } else if (i == 4) {
-        wojsko.x = wojsko.x + 0;
+        wojsko.x = wojsko.x - 0;
         wojsko.y = wojsko.y + 0;
       } else if (i == 5) {
-        wojsko.x = wojsko.x + 1;
-      } else if (i == 6) {
         wojsko.x = wojsko.x - 1;
+      } else if (i == 6) {
+        wojsko.x = wojsko.x + 1;
         wojsko.y = wojsko.y + 1;
       } else if (i == 7) {
         wojsko.y = wojsko.y + 1;
       } else if (i == 8) {
-        wojsko.x = wojsko.x + 1;
+        wojsko.x = wojsko.x - 1;
         wojsko.y = wojsko.y + 1;
       }
     } else buttons[i].active = false;
