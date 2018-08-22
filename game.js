@@ -96,11 +96,7 @@ function control() {
     } else buttons[i].active = false;
   }
 
-<<<<<<< HEAD
-  function colision(Xmin, Ymin,Xmax, Ymax) {
-=======
   function colision(Xmin, Ymin, Xmax, Ymax) {
->>>>>>> branch 'master' of https://github.com/Shy-boos/Game.git
     if (Xmax > mouseX && Xmin < mouseX) {
       if (Ymax > mouseY && Ymin < mouseY) {
         return true;
