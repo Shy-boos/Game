@@ -59,8 +59,8 @@ function control (kropek.x,kropek.y){
   for(let i=0; i<buttons.length; i++){
 if(colision(buttons[i].x,buttons[i].y,buttons[i].x + buttons[i].w,buttons[i].y+buttons[i].h)){
     if(i==0){
-    kropek.x=kropek.x+1
-    kropek.y=kropek.y+
+    kropek.x=kropek.x-1
+    kropek.y=kropek.y+1
     }
   }
   }
