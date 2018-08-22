@@ -1,6 +1,7 @@
 var buttons=[];
+wojsko=new kropek();
 function setup(){
-scale(0.1, 0.1);
+
 //createCanvas(window.innerWidth, window.innerHeight);
 createCanvas(800,800);
 background(0);
@@ -43,38 +44,66 @@ control();
 buttons.forEach(button=>button.show())
 fill(255);
 noStroke();
-rect(mouseX,mouseY,8,8,255);
-
-
-
+rect(wojsko.x,wojsko.y,8,8,255);
 
 }
 
-class kropek {this.x=0;this.y;}
+class kropek {
+constructor ()
+{
+x=0;
+x=0;
+this.x=x;
+this.y=y;
+}
+
+}
 
 
 
-function control (kropek.x,kropek.y){
+function control (){
   
-  for(let i=0; i<buttons.length; i++){
+ for(let i=0; i<buttons.length; i++){
 if(colision(buttons[i].x,buttons[i].y,buttons[i].x + buttons[i].w,buttons[i].y+buttons[i].h)){
     if(i==0){
-    kropek.x=kropek.x-1
-    kropek.y=kropek.y+1
-    }
-  }
+    wojsko.x=wojsko.x-1
+    wojsko.y=wojsko.y-1}
+    else if(i==1){
+    wojsko.y=wojsko.y-1}
+    else if(i==2){
+    wojsko.x=wojsko.x+1
+    wojsko.y=wojsko.y-1}
+    else if(i==3){
+    wojsko.x=wojsko.x-1}
+    else if(i==4){
+    wojsko.x=wojsko.x+0
+    wojsko.y=wojsko.y+0}
+    else if(i==5){
+    wojsko.x=wojsko.x+1}
+    else if(i==6){
+    wojsko.x=wojsko.x-1
+    wojsko.y=wojsko.y+1}
+    else if(i==7){
+    
+    wojsko.y=wojsko.y+1}
+    else if(i==8){
+    wojsko.x=wojsko.x+1
+    wojsko.y=wojsko.y+1}
+    
+  
+  
   }
   
 }
-function colision(Xmin,Xmax,Ymin,Ymax)
+
+function colision (Xmin,Xmax,Ymin,Ymax)
 {
   
    if(Xmax>mouseX && Xmin < mouseX){
       if(Ymax>mouseY && Ymin<mouseY){
-      console.log('hdh')
-      return true;
-      
-      }
+      return true;}
    }
-   else return false;
+   else {return false;}
 }
+
+
