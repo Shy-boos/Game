@@ -71,7 +71,7 @@ function colision(Xmin,Xmax,Ymin,Ymax)
   
    if(Xmax>mouseX && Xmin < mouseX){
       if(Ymax>mouseY && Ymin<mouseY){
-      console.log('hdh')
+      
       return true;
       
       }
