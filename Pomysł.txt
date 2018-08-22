@@ -1,0 +1,8 @@
+1.Im większy teren tym silniejsze wojska (lub większy obszar rysowania)
+2.Każde Wjechanie na swoje terytorium je wzmacnia.
+3. Ograniczony obszar widzenia. Gdy ktoś zaatakuje nasze terytorium dowiadujemy się o tym po jakimś czasie.(lub widzisz ruchy przeciwnika z opóźnieniem) 
+4.Występowanie bogatszych terenów które można podbijać (może to będzie wzmacniało wojsko, może terytorium)
+5.Obszary przez które trudno (powoli lub tracąc wojsko) się przechodzi (woda, góry, pustynia)
+6.Obszary zimowe, może jakieś pory roku.
+7.Tereny gdzie wytwarzane są pewne surowce.
+8.Im więcej np. Drewna, kamienia tym bardziej je wzmacnia [2.] (czyni bardziej ciemnym?) 
