@@ -1,7 +1,9 @@
 var buttons = [];
-wojsko = new kropek();
+
+var wojsko;
 
 function setup() {
+  wojsko = new kropek();
   //createCanvas(window.innerWidth, window.innerHeight);
   createCanvas(800, 800);
   background(0);
@@ -13,8 +15,12 @@ function setup() {
       this.y = y;
       this.h = h;
       this.w = w;
+      this.active = false;
     }
     show() {
+      if (this.active) fill(0, 255, 0);
+      else fill(255);
+
       rect(this.x, this.y, this.w, this.h);
     }
   }
@@ -47,10 +53,8 @@ function draw() {
 
 class kropek {
   constructor() {
-    x = 0;
-    x = 0;
-    this.x = x;
-    this.y = y;
+    this.x = 0;
+    this.y = 0;
   }
 }
 
@@ -64,6 +68,8 @@ function control() {
         buttons[i].y + buttons[i].h
       )
     ) {
+      buttons[i].active = true;
+
       if (i == 0) {
         wojsko.x = wojsko.x - 1;
         wojsko.y = wojsko.y - 1;
@@ -88,10 +94,10 @@ function control() {
         wojsko.x = wojsko.x + 1;
         wojsko.y = wojsko.y + 1;
       }
-    }
+    } else buttons[i].active = false;
   }
 
-  function colision(Xmin, Xmax, Ymin, Ymax) {
+  function colision(Xmin, Ymin, Xmax, Ymax) {
     if (Xmax > mouseX && Xmin < mouseX) {
       if (Ymax > mouseY && Ymin < mouseY) {
         return true;
