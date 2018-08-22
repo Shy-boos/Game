@@ -14,8 +14,12 @@ function setup() {
       this.y = y;
       this.h = h;
       this.w = w;
+      this.active = false;
     }
     show() {
+      if (this.active) fill(0, 255, 0);
+      else fill(255);
+
       rect(this.x, this.y, this.w, this.h);
     }
   }
@@ -63,8 +67,10 @@ function control() {
         buttons[i].y + buttons[i].h
       )
     ) {
+      buttons[i].active = true;
+
       if (i == 0) {
-        wojsko.x = wojsko.x +1;
+        wojsko.x = wojsko.x + 1;
         wojsko.y = wojsko.y - 1;
       } else if (i == 1) {
         wojsko.y = wojsko.y - 1;
@@ -87,10 +93,14 @@ function control() {
         wojsko.x = wojsko.x - 1;
         wojsko.y = wojsko.y + 1;
       }
-    }
+    } else buttons[i].active = false;
   }
 
+<<<<<<< HEAD
   function colision(Xmin, Ymin,Xmax, Ymax) {
+=======
+  function colision(Xmin, Ymin, Xmax, Ymax) {
+>>>>>>> branch 'master' of https://github.com/Shy-boos/Game.git
     if (Xmax > mouseX && Xmin < mouseX) {
       if (Ymax > mouseY && Ymin < mouseY) {
         return true;
