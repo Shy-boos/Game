@@ -2,8 +2,8 @@ var buttons = [];
 var wojsko;
 
 function setup() {
-  //createCanvas(window.innerWidth, window.innerHeight);
-  createCanvas(800, 800);
+  createCanvas(window.innerWidth, window.innerHeight);
+  // createCanvas(800, 800);
   background(0);
   fill(255);
   wojsko = new kropek();
@@ -17,25 +17,25 @@ function setup() {
       this.active = false;
     }
     show() {
-      if (this.active) fill(0, 255, 0);
-      else fill(255);
+      if (this.active) fill(0, 255, 0, 100);
+      else fill(255, 100);
 
       rect(this.x, this.y, this.w, this.h);
     }
   }
   fill(255);
-  buttons[0] = new button(640, 640, 49, 49);
-  buttons[1] = new button(590, 640, 49, 49);
-  buttons[2] = new button(540, 640, 49, 49);
+  buttons[0] = new button(640 - 350, 640 - 260, 49, 49);
+  buttons[1] = new button(590 - 350, 640 - 260, 49, 49);
+  buttons[2] = new button(540 - 350, 640 - 260, 49, 49);
 
-  buttons[3] = new button(640, 690, 49, 49);
-  buttons[4] = new button(590, 690, 49, 49);
-  buttons[5] = new button(540, 690, 49, 49);
+  buttons[3] = new button(640 - 350, 690 - 260, 49, 49);
+  buttons[4] = new button(590 - 350, 690 - 260, 49, 49);
+  buttons[5] = new button(540 - 350, 690 - 260, 49, 49);
 
   //
-  buttons[6] = new button(640, 740, 49, 49);
-  buttons[7] = new button(590, 740, 49, 49);
-  buttons[8] = new button(540, 740, 49, 49);
+  buttons[6] = new button(640 - 350, 740 - 260, 49, 49);
+  buttons[7] = new button(590 - 350, 740 - 260, 49, 49);
+  buttons[8] = new button(540 - 350, 740 - 260, 49, 49);
 
   stroke(230);
   fill(0, 0);
@@ -43,6 +43,7 @@ function setup() {
 }
 
 function draw() {
+  // background(0);
   control();
   buttons.forEach(button => button.show());
   fill(255);
