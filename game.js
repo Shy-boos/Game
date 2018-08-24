@@ -1,10 +1,38 @@
 var buttons = [];
 var wojsko;
+var grid=[[],[]];
+var graphics;
+var cell;
 
 function setup() {
+
   createCanvas(window.innerWidth, window.innerHeight);
   // createCanvas(800, 800);
-  background(0);
+  
+  graphics= createGraphics(window.innerWidth, window.innerHeight);
+  graphics.clear()
+  
+  image(graphics,0,0)
+  
+  //background(0);
+  
+  class cel {
+  constructor(i,j) {
+    this.i = i;
+    this.j = j;
+    this.draw();
+  }
+  draw(){
+  fill(255)
+  rect(i,j,10,10)}
+}
+  for(var i=0;i<window.innerWidth;i=i+10){
+  for(var j=0;j<((window.innerHeight));j=j+10){
+  var wynik=i+j;
+  cell= new cel(i,j);
+  }
+  }
+  
   fill(255);
   wojsko = new kropek();
   var x = 40;
@@ -43,12 +71,15 @@ function setup() {
 }
 
 function draw() {
-  // background(0);
+  //background(255);
+  
+  
   control();
   buttons.forEach(button => button.show());
-  fill(255);
-  noStroke();
-  rect(wojsko.x, wojsko.y, 8, 8, 255);
+  graphics.fill(0);
+  graphics.noStroke();
+  graphics.rect(wojsko.x, wojsko.y, 8, 8, 255);
+  
 }
 
 class kropek {
