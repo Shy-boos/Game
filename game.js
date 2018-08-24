@@ -1,37 +1,33 @@
 var buttons = [];
 var wojsko;
-var grid=[[],[]];
-var graphics;
+var grid=[[],[]]
 var cell;
+var v=3;
+class cel {
+  constructor(i,j,r=255,g=255,b=255) {
+    this.i = i;
+    this.j = j;
+    this.r=r
+    this.g=g
+    this.b=b
+    this.draw();
+  }
+  draw(){
+  stroke(0)
+  fill(this.r,this.g,this.b)
+  rect(this.i,this.j,10,10)}
+  }
 
 function setup() {
 
   createCanvas(window.innerWidth, window.innerHeight);
   // createCanvas(800, 800);
   
-  graphics= createGraphics(window.innerWidth, window.innerHeight);
-  graphics.clear()
   
-  image(graphics,0,0)
   
   //background(0);
   
-  class cel {
-  constructor(i,j) {
-    this.i = i;
-    this.j = j;
-    this.draw();
-  }
-  draw(){
-  fill(255)
-  rect(i,j,10,10)}
-}
-  for(var i=0;i<window.innerWidth;i=i+10){
-  for(var j=0;j<((window.innerHeight));j=j+10){
-  var wynik=i+j;
-  cell= new cel(i,j);
-  }
-  }
+  
   
   fill(255);
   wojsko = new kropek();
@@ -45,8 +41,8 @@ function setup() {
       this.active = false;
     }
     show() {
-      if (this.active) fill(0, 255, 0, 100);
-      else fill(255, 100);
+      if (this.active) fill(0, 255, 0, 200);
+      else fill(255, 200);
 
       rect(this.x, this.y, this.w, this.h);
     }
@@ -70,17 +66,46 @@ function setup() {
   ellipse(575 + x, 675 + x, 175);
 }
 
+
+
+
+
+
+
 function draw() {
-  //background(255);
+
+ v=v+1
+ if(v>=4){
+ let x=0;
+ let y=0;
+  for(var i=0; i < window.innerWidth;i=i+10){ 
+  grid[x] = []
+  
+  for(var j=0; j < window.innerHeight;j=j+10){
+  
+  var wynik=i+j;
+  cell=new cel(i,j);
+  grid[x][y]=cell;
+  if(v>4) v=v-5
+  y=y+1
+  }
+  x=x+1
+  }
+  
+  }
+  
   
   
   control();
   buttons.forEach(button => button.show());
-  graphics.fill(0);
-  graphics.noStroke();
-  graphics.rect(wojsko.x, wojsko.y, 8, 8, 255);
+  fill(0);
+  noStroke();
+  rect(wojsko.x, wojsko.y, 5, 5, 255);
   
-}
+  
+  
+  }
+    
 
 class kropek {
   constructor() {
@@ -137,4 +162,13 @@ function control() {
       return false;
     }
   }
+  
+  
+  
+  
+  
+ 
 }
+
+
+
