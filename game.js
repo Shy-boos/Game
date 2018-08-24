@@ -1,52 +1,52 @@
 var buttons = [];
 var wojsko;
-var grid=[[],[]]
+var grid = [];
 var cell;
-var v=3;
+var v = 3;
 class cel {
-  constructor(i,j,r=255,g=255,b=255) {
+  constructor(i, j, r = 255, g = 255, b = 255) {
     this.i = i;
     this.j = j;
-    this.r=r
-    this.g=g
-    this.b=b
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.color = color(this.r, this.g, this.b);
     this.draw();
   }
-  draw(){
-  stroke(0)
-  fill(this.r,this.g,this.b)
-  rect(this.i,this.j,10,10)}
+  draw() {
+    // stroke(0);
+    fill(this.color);
+    // fill(255);
+    rect(this.i, this.j, 10, 10);
   }
+}
+
+class button {
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.h = h;
+    this.w = w;
+    this.active = false;
+  }
+  show() {
+    if (this.active) fill(0, 255, 0, 200);
+    else fill(255, 200);
+
+    rect(this.x, this.y, this.w, this.h);
+  }
+}
 
 function setup() {
-
   createCanvas(window.innerWidth, window.innerHeight);
+  black = color(0);
   // createCanvas(800, 800);
-  
-  
-  
+
   //background(0);
-  
-  
-  
+
   fill(255);
   wojsko = new kropek();
-  var x = 40;
-  class button {
-    constructor(x, y, w, h) {
-      this.x = x;
-      this.y = y;
-      this.h = h;
-      this.w = w;
-      this.active = false;
-    }
-    show() {
-      if (this.active) fill(0, 255, 0, 200);
-      else fill(255, 200);
 
-      rect(this.x, this.y, this.w, this.h);
-    }
-  }
   fill(255);
   buttons[0] = new button(640 - 350, 640 - 260, 49, 49);
   buttons[1] = new button(590 - 350, 640 - 260, 49, 49);
@@ -63,49 +63,41 @@ function setup() {
 
   stroke(230);
   fill(0, 0);
-  ellipse(575 + x, 675 + x, 175);
+  var ellipseX = 40;
+  ellipse(575 + ellipseX, 675 + ellipseX, 175);
+
+  let x = 0;
+  let y = 0;
+  for (var i = 0; i < width; i = i + 10) {
+    grid[x] = [];
+
+    for (var j = 0; j < height; j = j + 10) {
+      var wynik = i + j;
+      grid[x][y] = new cel(i, j);
+      y = y + 1;
+    }
+    x = x + 1;
+    y = 0;
+  }
 }
 
-
-
-
-
-
-
 function draw() {
+  // background(255);
+  console.log(frameRate());
+  stroke(0);
+  for (let x = 0; x < grid.length; x++) {
+    // console.log(grid[x]);
+    for (let y = 0; y < grid[x].length; y++) {
+      grid[x][y].draw();
+    }
+  }
 
- v=v+1
- if(v>=4){
- let x=0;
- let y=0;
-  for(var i=0; i < window.innerWidth;i=i+10){ 
-  grid[x] = []
-  
-  for(var j=0; j < window.innerHeight;j=j+10){
-  
-  var wynik=i+j;
-  cell=new cel(i,j);
-  grid[x][y]=cell;
-  if(v>4) v=v-5
-  y=y+1
-  }
-  x=x+1
-  }
-  
-  }
-  
-  
-  
   control();
   buttons.forEach(button => button.show());
   fill(0);
   noStroke();
   rect(wojsko.x, wojsko.y, 5, 5, 255);
-  
-  
-  
-  }
-    
+}
 
 class kropek {
   constructor() {
@@ -162,13 +154,4 @@ function control() {
       return false;
     }
   }
-  
-  
-  
-  
-  
- 
 }
-
-
-
