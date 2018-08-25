@@ -3,6 +3,9 @@ var wojsko;
 var grid = [];
 var cell;
 var v = 3;
+var pozycja
+
+
 class cel {
   constructor(i, j, r = 255, g = 255, b = 255) {
     this.i = i;
@@ -81,9 +84,16 @@ function setup() {
   }
 }
 
+
+
+
+
 function draw() {
   // background(255);
-  console.log(frameRate());
+  
+  
+  
+  
   stroke(0);
   for (let x = 0; x < grid.length; x++) {
     // console.log(grid[x]);
@@ -97,12 +107,88 @@ function draw() {
   fill(0);
   noStroke();
   rect(wojsko.x, wojsko.y, 5, 5, 255);
+  
+  
+  
+  var x=wojsko.pozycjaX
+ var y=wojsko.pozycjaY
+  
+ 
+   if (colision(grid[x][y].i,grid[x][y].j,grid[x][y].i+10,grid[x][y].j+10,wojsko.x+2,wojsko.y+2)){
+
+   console.log(wojsko.x)
+   console.log(wojsko.y)
+} 
+else if (x>0){
+if (colision(grid[x-1][y].i,grid[x-1][y].j,grid[x-1][y].i+10,grid[x-1][y].j+10,wojsko.x+2,wojsko.y+2)){
+   if(wojsko.pozycjaX>0){
+   wojsko.pozycjaX=x-1}
+   console.log(wojsko.x)
+   console.log(wojsko.y)
+}
+} 
+
+
+else if (colision(grid[x+1][y].i,grid[x+1][y].j,grid[x+1][y].i+10,grid[x+1][y].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaX=x+1
+   console.log(wojsko.x)
+   console.log(wojsko.y)
+
+} 
+else if (x>0 && y>0){
+if (colision(grid[x-1][y-1].i,grid[x-1][y-1].j,grid[x-1][y-1].i+10,grid[x-1][y-1].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaX=x-1
+   wojsko.pozycjaY=y-1
+ console.log(wojsko.x)
+   console.log(wojsko.y)
+} }
+else if (y>0){
+if (colision(grid[x][y-1].i,grid[x][y-1].j,grid[x][y-1].i+10,grid[x][y-1].j+10,wojsko.x+2,wojsko.y+2)){
+      wojsko.pozycjaY=y-1
+console.log(wojsko.x)
+   console.log(wojsko.y)
+} }
+else if (y>0){
+if (colision(grid[x+1][y-1].i,grid[x+1][y-1].j,grid[x+1][y-1].i+10,grid[x+1][y-1].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaX=x+1
+   wojsko.pozycjaY=y-1
+console.log(wojsko.x)
+   console.log(wojsko.y)
+} }
+else if (x>0){
+if (colision(grid[x-1][y+1].i,grid[x-1][y+1].j,grid[x-1][y+1].i+10,grid[x-1][y+1].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaX=x-1
+   wojsko.pozycjaY=y+1
+console.log(wojsko.x)
+   console.log(wojsko.y)
+} }
+
+else if (colision(grid[x+1][y+1].i,grid[x+1][y+1].j,grid[x+1][y+1].i+10,grid[x+1][y+1].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaX=x+1
+   wojsko.pozycjaY=y+1
+console.log(wojsko.x)
+   console.log(wojsko.y)
+} 
+
+else if (colision(grid[x][y+1].i,grid[x][y+1].j,grid[x][y+1].i+10,grid[x][y+1].j+10,wojsko.x+2,wojsko.y+2)){
+   wojsko.pozycjaY=y+1
+console.log(wojsko.x)
+   console.log(wojsko.y)
+} 
+  
+  
+  
 }
 
 class kropek {
   constructor() {
     this.x = 0;
     this.y = 0;
+    this.pozycjaX=0
+    this.pozycjaY=0
+    
+    
+    
   }
 }
 
@@ -145,13 +231,14 @@ function control() {
     } else buttons[i].active = false;
   }
 
-  function colision(Xmin, Ymin, Xmax, Ymax) {
-    if (Xmax > mouseX && Xmin < mouseX) {
-      if (Ymax > mouseY && Ymin < mouseY) {
+  
+}
+function colision(Xmin, Ymin, Xmax, Ymax,pozX=mouseX,pozY=mouseY) {
+    if (Xmax > pozX && Xmin < pozX) {
+      if (Ymax > pozY && Ymin < pozY) {
         return true;
       }
     } else {
       return false;
     }
   }
-}
