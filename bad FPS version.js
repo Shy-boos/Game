@@ -102,11 +102,7 @@ function draw() {
 
   var x = wojsko.pozycjaX;
   var y = wojsko.pozycjaY;
-
   console.log(x, y);
-  //
-  // Did Leave Cell?
-  //
   if (
     colision(
       grid[x][y].i,
@@ -119,41 +115,36 @@ function draw() {
   ) {
   } else {
     //
-    // Kierunki
-    //
-    if (isGridColliding(x - 1, y, wojsko.x, wojsko.y)) {
-      // Left
-      wojsko.pozycjaX = x - 1;
-    } else if (isGridColliding(x + 1, y, wojsko.x, wojsko.y)) {
-      // Right
-      wojsko.pozycjaX = x + 1;
-    } else if (isGridColliding(x, y - 1, wojsko.x, wojsko.y)) {
-      // Top
-      wojsko.pozycjaY = y - 1;
-    } else if (isGridColliding(x, y + 1, wojsko.x, wojsko.y)) {
-      // Down
-      wojsko.pozycjaY = y + 1;
+
+    if (x > 0 && y > 0) {
+      //
     }
 
     //
-    // Skosy
-    //
-    else if (isGridColliding(x - 1, y - 1, wojsko.x, wojsko.y)) {
-      // Left-Top
-      wojsko.pozycjaX = x - 1;
-      wojsko.pozycjaY = y - 1;
-    } else if (isGridColliding(x + 1, y - 1, wojsko.x, wojsko.y)) {
-      // Right-Top
-      wojsko.pozycjaX = x + 1;
-      wojsko.pozycjaY = y - 1;
-    } else if (isGridColliding(x - 1, y + 1, wojsko.x, wojsko.y)) {
-      // Left-Down
-      wojsko.pozycjaX = x - 1;
-      wojsko.pozycjaY = y + 1;
-    } else if (isGridColliding(x + 1, y + 1, wojsko.x, wojsko.y)) {
-      // Right-Down
-      wojsko.pozycjaX = x + 1;
-      wojsko.pozycjaY = y + 1;
+    if (x > 0) {
+      if (isGridColliding(x - 1, y, wojsko.x, wojsko.y)) {
+        wojsko.pozycjaX = x - 1;
+        console.log("lewo");
+      }
+    }
+    if (x < grid.length - 1) {
+      if (isGridColliding(x + 1, y, wojsko.x, wojsko.y)) {
+        wojsko.pozycjaX = x + 1;
+        console.log("prawo");
+      }
+    }
+
+    if (y > 0) {
+      if (isGridColliding(x, y - 1, wojsko.x, wojsko.y)) {
+        wojsko.pozycjaY = y - 1;
+        console.log("top");
+      }
+    }
+    if (y < grid[0].length - 1) {
+      if (isGridColliding(x, y + 1, wojsko.x, wojsko.y)) {
+        wojsko.pozycjaY = y + 1;
+        console.log("down");
+      }
     }
 
     //
@@ -181,35 +172,29 @@ function control() {
     ) {
       buttons[i].active = true;
 
-      // Prędkość Wojska
-      // Wojska Przysipieszą gdy FPS jest mało
-      // zowlnią gdy jest ich dóżo
-      let spedMult = 0.05; // Mnożnik Prędkości
-      let speed = (1000 / frameRate()) * spedMult;
-
       if (i == 0) {
-        wojsko.x = wojsko.x + 1 * speed;
-        wojsko.y = wojsko.y - 1 * speed;
+        wojsko.x = wojsko.x + 1;
+        wojsko.y = wojsko.y - 1;
       } else if (i == 1) {
-        wojsko.y = wojsko.y - 1 * speed;
+        wojsko.y = wojsko.y - 1;
       } else if (i == 2) {
-        wojsko.x = wojsko.x - 1 * speed;
-        wojsko.y = wojsko.y - 1 * speed;
+        wojsko.x = wojsko.x - 1;
+        wojsko.y = wojsko.y - 1;
       } else if (i == 3) {
-        wojsko.x = wojsko.x + 1 * speed;
+        wojsko.x = wojsko.x + 1;
       } else if (i == 4) {
-        wojsko.x = wojsko.x - 0 * speed;
-        wojsko.y = wojsko.y + 0 * speed;
+        wojsko.x = wojsko.x - 0;
+        wojsko.y = wojsko.y + 0;
       } else if (i == 5) {
-        wojsko.x = wojsko.x - 1 * speed;
+        wojsko.x = wojsko.x - 1;
       } else if (i == 6) {
-        wojsko.x = wojsko.x + 1 * speed;
-        wojsko.y = wojsko.y + 1 * speed;
+        wojsko.x = wojsko.x + 1;
+        wojsko.y = wojsko.y + 1;
       } else if (i == 7) {
-        wojsko.y = wojsko.y + 1 * speed;
+        wojsko.y = wojsko.y + 1;
       } else if (i == 8) {
-        wojsko.x = wojsko.x - 1 * speed;
-        wojsko.y = wojsko.y + 1 * speed;
+        wojsko.x = wojsko.x - 1;
+        wojsko.y = wojsko.y + 1;
       }
     } else buttons[i].active = false;
   }
