@@ -6,16 +6,19 @@ var v = 3;
 var pozycja;
 
 class cel {
-  constructor(i, j, r = 200, g = 200, b = 200) {
+  constructor(i, j, r = 115, g = 195, b = 76) {
     this.i = i;
     this.j = j;
     this.r = r;
     this.g = g;
     this.b = b;
+    this.a = 2;
+
     //this.draw();
   }
   draw() {
-    stroke(0);
+    strokeWeight(this.a);
+    stroke(80, 80, 80, 255);
     fill(this.r, this.g, this.b);
     rect(this.i, this.j, 10, 10);
   }
@@ -80,14 +83,7 @@ function setup() {
     y = 0;
   }
 
-  for (let ii = 4; ii < 7; ii++) {
-    for (let jj = 4; jj < 6; jj++) {
-      //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 10;
-      grid[ii][jj].g = 10;
-      grid[ii][jj].b = 210;
-    }
-  }
+  rysuj();
 
   for (let x = 0; x < grid.length; x++) {
     // console.log(grid[x]);
@@ -99,51 +95,29 @@ function setup() {
 
 function draw() {
   // background(255);
-  stroke(0);
-  var x = wojsko.pozycjaX;
-  var y = wojsko.pozycjaY;
-
-  grid[x][y].r = 0;
-  grid[x][y].g = 255;
-  grid[x][y].b = 0;
-
-  grid[x][y].draw();
-  if (grid[x][y].r === 10 && grid[x][y].g === 10 && grid[x][y].b === 210) {
-    wojsko.spedMult = 0.007;
-    console.log("c");
-  } else {
-    wojsko.spedMult = 0.025;
-  }
-  if (x > 0) {
-    grid[x - 1][y].draw();
-  }
-  if (x < grid.length) grid[x + 1][y].draw();
-  if (x > 0 && y > 0) grid[x - 1][y - 1].draw();
-  if (y > 0) grid[x][y - 1].draw();
-  if (x < grid.length && y > 0) grid[x + 1][y - 1].draw();
-  if (x > 0 && y < grid[0].length) grid[x - 1][y + 1].draw();
-  if (x < grid.length && y < grid[0].length) {
-    grid[x + 1][y + 1].draw();
-  }
-  if (y < grid[0].length) {
-    grid[x][y + 1].draw();
-  }
-}
-
-function draw() {
-  // background(255);
 
   stroke(0);
   var x = wojsko.pozycjaX;
   var y = wojsko.pozycjaY;
 
   grid[x][y].draw();
-  if (grid[x][y].r === 10 && grid[x][y].g === 10 && grid[x][y].b === 210) {
-    wojsko.spedMult = 0.007;
+  if (grid[x][y].r === 0 && grid[x][y].g === 130 && grid[x][y].b === 255) {
+    wojsko.spedMult = 0.003;
     console.log("c");
   } else {
-    wojsko.spedMult = 0.025;
+    wojsko.spedMult = 0.02;
   }
+  if (grid[x][y].r === 230 && grid[x][y].g === 220 && grid[x][y].b === 175) {
+    wojsko.spedMult = 0.007;
+    //console.log("c");
+  }
+  if (grid[x][y].r === 212 && grid[x][y].g === 165 && grid[x][y].b === 54) {
+    wojsko.spedMult = 0.005;
+  }
+  if (grid[x][y].r === 160 && grid[x][y].g === 120 && grid[x][y].b === 35) {
+    wojsko.spedMult = 0.003;
+  }
+
   if (x > 0) {
     grid[x - 1][y].draw();
   }
@@ -228,7 +202,7 @@ class kropek {
     this.y = 0;
     this.pozycjaX = 0;
     this.pozycjaY = 0;
-    this.spedMult = 0.025;
+    this.spedMult = 0.022;
   }
 }
 
@@ -285,5 +259,157 @@ function colision(Xmin, Ymin, Xmax, Ymax, pozX = mouseX, pozY = mouseY) {
     }
   } else {
     return false;
+  }
+}
+
+function rysuj() {
+  let x = 5;
+  for (let ii = 5 + x; ii < 9 + x; ii++) {
+    for (let jj = 6 + x; jj < 8 + x; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 0;
+      grid[ii][jj].g = 130;
+      grid[ii][jj].b = 255;
+    }
+  }
+  for (let ii = 4 + x; ii < 13 + x; ii++) {
+    for (let jj = 8 + x; jj < 12 + x; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 0;
+      grid[ii][jj].g = 130;
+      grid[ii][jj].b = 255;
+    }
+  }
+
+  for (let ii = 6 + x; ii < 11 + x; ii++) {
+    for (let jj = 11 + x; jj < 13 + x; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 0;
+      grid[ii][jj].g = 130;
+      grid[ii][jj].b = 255;
+    }
+  }
+
+  grid[9 + x][7 + x].r = 0;
+  grid[9 + x][7 + x].g = 130;
+  grid[9 + x][7 + x].b = 255;
+
+  //Góra
+  let g = 6;
+  for (let ii = 0; ii < 14 + g; ii++) {
+    for (let jj = 35 + g; jj < 51 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 230;
+      grid[ii][jj].g = 220;
+      grid[ii][jj].b = 175;
+    }
+  }
+  //zielony
+  for (let ii = 17; ii < 16 + g; ii++) {
+    for (let jj = 33 + g; jj < 37 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 115;
+      grid[ii][jj].g = 195;
+      grid[ii][jj].b = 76;
+    }
+  }
+  for (let ii = 0; ii < 4; ii++) {
+    for (let jj = 33 + g; jj < 36 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 115;
+      grid[ii][jj].g = 195;
+      grid[ii][jj].b = 76;
+    }
+  }
+  // koniec zielony
+
+  for (let ii = 5; ii < 7 + g; ii++) {
+    for (let jj = 38 + g; jj < 40 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 212;
+      grid[ii][jj].g = 165;
+      grid[ii][jj].b = 54;
+    }
+  }
+
+  for (let ii = 4; ii < 8 + g; ii++) {
+    for (let jj = 39 + g; jj < 47 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 212;
+      grid[ii][jj].g = 165;
+      grid[ii][jj].b = 54;
+    }
+  }
+
+  for (let ii = 2; ii < 8 + g; ii++) {
+    for (let jj = 39 + g; jj < 45 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 212;
+      grid[ii][jj].g = 165;
+      grid[ii][jj].b = 54;
+    }
+  }
+  for (let ii = 0; ii < 8 + g; ii++) {
+    for (let jj = 40 + g; jj < 43 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 212;
+      grid[ii][jj].g = 165;
+      grid[ii][jj].b = 54;
+    }
+  }
+
+  for (let ii = 9; ii < 11 + g; ii++) {
+    for (let jj = 42 + g; jj < 51 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 212;
+      grid[ii][jj].g = 165;
+      grid[ii][jj].b = 54;
+    }
+  }
+  grid[8][25 + 28].r = 212;
+  grid[8][25 + 28].g = 165;
+  grid[8][25 + 28].b = 54;
+
+  for (let ii = 5; ii < 7 + g; ii++) {
+    for (let jj = 42 + g; jj < 45 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 160;
+      grid[ii][jj].g = 120;
+      grid[ii][jj].b = 35;
+    }
+  }
+
+  for (let ii = 8; ii < 8 + g; ii++) {
+    for (let jj = 43 + g; jj < 46 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 160;
+      grid[ii][jj].g = 120;
+      grid[ii][jj].b = 35;
+    }
+  }
+
+  for (let ii = 10; ii < 15; ii++) {
+    for (let jj = 45 + g; jj < 48 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 160;
+      grid[ii][jj].g = 120;
+      grid[ii][jj].b = 35;
+    }
+  }
+  for (let ii = 11; ii < 14; ii++) {
+    for (let jj = 46 + g; jj < 49 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 160;
+      grid[ii][jj].g = 120;
+      grid[ii][jj].b = 35;
+    }
+  }
+  for (let ii = 6; ii < 11; ii++) {
+    for (let jj = 41 + g; jj < 42 + g; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 160;
+      grid[ii][jj].g = 120;
+      grid[ii][jj].b = 35;
+    }
   }
 }
