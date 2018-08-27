@@ -128,6 +128,36 @@ function draw() {
   if (y < grid[0].length) {
     grid[x][y + 1].draw();
   }
+}
+
+function draw() {
+  // background(255);
+
+  stroke(0);
+  var x = wojsko.pozycjaX;
+  var y = wojsko.pozycjaY;
+
+  grid[x][y].draw();
+  if (grid[x][y].r === 10 && grid[x][y].g === 10 && grid[x][y].b === 210) {
+    wojsko.spedMult = 0.007;
+    console.log("c");
+  } else {
+    wojsko.spedMult = 0.025;
+  }
+  if (x > 0) {
+    grid[x - 1][y].draw();
+  }
+  if (x < grid.length) grid[x + 1][y].draw();
+  if (x > 0 && y > 0) grid[x - 1][y - 1].draw();
+  if (y > 0) grid[x][y - 1].draw();
+  if (x < grid.length && y > 0) grid[x + 1][y - 1].draw();
+  if (x > 0 && y < grid[0].length) grid[x - 1][y + 1].draw();
+  if (x < grid.length && y < grid[0].length) {
+    grid[x + 1][y + 1].draw();
+  }
+  if (y < grid[0].length) {
+    grid[x][y + 1].draw();
+  }
 
   control();
   buttons.forEach(button => button.show());
