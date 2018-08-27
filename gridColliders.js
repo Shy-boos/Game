@@ -20,3 +20,13 @@ function isGridColliding(x, y, wojskoX, wojskoY) {
   );
   return condition;
 }
+
+function colision(Xmin, Ymin, Xmax, Ymax, pozX = mouseX, pozY = mouseY) {
+  if (Xmax > pozX && Xmin < pozX) {
+    if (Ymax > pozY && Ymin < pozY) {
+      return true;
+    }
+  } else {
+    return false;
+  }
+}

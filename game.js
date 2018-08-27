@@ -110,11 +110,17 @@ function draw() {
   if (grid[x][y].r === 230 && grid[x][y].g === 220 && grid[x][y].b === 175) {
     wojsko.spedMult = 0.007;
     //console.log("c");
-  }
-  if (grid[x][y].r === 212 && grid[x][y].g === 165 && grid[x][y].b === 54) {
+  } else if (
+    grid[x][y].r === 212 &&
+    grid[x][y].g === 165 &&
+    grid[x][y].b === 54
+  ) {
     wojsko.spedMult = 0.005;
-  }
-  if (grid[x][y].r === 160 && grid[x][y].g === 120 && grid[x][y].b === 35) {
+  } else if (
+    grid[x][y].r === 160 &&
+    grid[x][y].g === 120 &&
+    grid[x][y].b === 35
+  ) {
     wojsko.spedMult = 0.003;
   }
 
@@ -252,14 +258,20 @@ function control() {
     } else buttons[i].active = false;
   }
 }
-function colision(Xmin, Ymin, Xmax, Ymax, pozX = mouseX, pozY = mouseY) {
-  if (Xmax > pozX && Xmin < pozX) {
-    if (Ymax > pozY && Ymin < pozY) {
-      return true;
-    }
-  } else {
+
+function checkIfCellExsist(x, y) {
+  // Did leave Grid Test
+  if (x < 0) {
+    return false;
+  } else if (x > grid.length - 1) {
+    return false;
+  } else if (y < 0) {
+    return false;
+  } else if (y > grid[0].length - 1) {
     return false;
   }
+
+  return true;
 }
 
 function rysuj() {
@@ -267,26 +279,32 @@ function rysuj() {
   for (let ii = 5 + x; ii < 9 + x; ii++) {
     for (let jj = 6 + x; jj < 8 + x; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 0;
-      grid[ii][jj].g = 130;
-      grid[ii][jj].b = 255;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 0;
+        grid[ii][jj].g = 130;
+        grid[ii][jj].b = 255;
+      }
     }
   }
   for (let ii = 4 + x; ii < 13 + x; ii++) {
     for (let jj = 8 + x; jj < 12 + x; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 0;
-      grid[ii][jj].g = 130;
-      grid[ii][jj].b = 255;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 0;
+        grid[ii][jj].g = 130;
+        grid[ii][jj].b = 255;
+      }
     }
   }
 
   for (let ii = 6 + x; ii < 11 + x; ii++) {
     for (let jj = 11 + x; jj < 13 + x; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 0;
-      grid[ii][jj].g = 130;
-      grid[ii][jj].b = 255;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 0;
+        grid[ii][jj].g = 130;
+        grid[ii][jj].b = 255;
+      }
     }
   }
 
@@ -299,26 +317,32 @@ function rysuj() {
   for (let ii = 0; ii < 14 + g; ii++) {
     for (let jj = 35 + g; jj < 51 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 230;
-      grid[ii][jj].g = 220;
-      grid[ii][jj].b = 175;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 230;
+        grid[ii][jj].g = 220;
+        grid[ii][jj].b = 175;
+      }
     }
   }
   //zielony
   for (let ii = 17; ii < 16 + g; ii++) {
     for (let jj = 33 + g; jj < 37 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 115;
-      grid[ii][jj].g = 195;
-      grid[ii][jj].b = 76;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 115;
+        grid[ii][jj].g = 195;
+        grid[ii][jj].b = 76;
+      }
     }
   }
   for (let ii = 0; ii < 4; ii++) {
     for (let jj = 33 + g; jj < 36 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 115;
-      grid[ii][jj].g = 195;
-      grid[ii][jj].b = 76;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 115;
+        grid[ii][jj].g = 195;
+        grid[ii][jj].b = 76;
+      }
     }
   }
   // koniec zielony
@@ -326,44 +350,54 @@ function rysuj() {
   for (let ii = 5; ii < 7 + g; ii++) {
     for (let jj = 38 + g; jj < 40 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 212;
-      grid[ii][jj].g = 165;
-      grid[ii][jj].b = 54;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 212;
+        grid[ii][jj].g = 165;
+        grid[ii][jj].b = 54;
+      }
     }
   }
 
   for (let ii = 4; ii < 8 + g; ii++) {
     for (let jj = 39 + g; jj < 47 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 212;
-      grid[ii][jj].g = 165;
-      grid[ii][jj].b = 54;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 212;
+        grid[ii][jj].g = 165;
+        grid[ii][jj].b = 54;
+      }
     }
   }
 
   for (let ii = 2; ii < 8 + g; ii++) {
     for (let jj = 39 + g; jj < 45 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 212;
-      grid[ii][jj].g = 165;
-      grid[ii][jj].b = 54;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 212;
+        grid[ii][jj].g = 165;
+        grid[ii][jj].b = 54;
+      }
     }
   }
   for (let ii = 0; ii < 8 + g; ii++) {
     for (let jj = 40 + g; jj < 43 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 212;
-      grid[ii][jj].g = 165;
-      grid[ii][jj].b = 54;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 212;
+        grid[ii][jj].g = 165;
+        grid[ii][jj].b = 54;
+      }
     }
   }
 
   for (let ii = 9; ii < 11 + g; ii++) {
     for (let jj = 42 + g; jj < 51 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 212;
-      grid[ii][jj].g = 165;
-      grid[ii][jj].b = 54;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 212;
+        grid[ii][jj].g = 165;
+        grid[ii][jj].b = 54;
+      }
     }
   }
   grid[8][25 + 28].r = 212;
@@ -373,43 +407,53 @@ function rysuj() {
   for (let ii = 5; ii < 7 + g; ii++) {
     for (let jj = 42 + g; jj < 45 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 160;
-      grid[ii][jj].g = 120;
-      grid[ii][jj].b = 35;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 160;
+        grid[ii][jj].g = 120;
+        grid[ii][jj].b = 35;
+      }
     }
   }
 
   for (let ii = 8; ii < 8 + g; ii++) {
     for (let jj = 43 + g; jj < 46 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 160;
-      grid[ii][jj].g = 120;
-      grid[ii][jj].b = 35;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 160;
+        grid[ii][jj].g = 120;
+        grid[ii][jj].b = 35;
+      }
     }
   }
 
   for (let ii = 10; ii < 15; ii++) {
     for (let jj = 45 + g; jj < 48 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 160;
-      grid[ii][jj].g = 120;
-      grid[ii][jj].b = 35;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 160;
+        grid[ii][jj].g = 120;
+        grid[ii][jj].b = 35;
+      }
     }
   }
   for (let ii = 11; ii < 14; ii++) {
     for (let jj = 46 + g; jj < 49 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 160;
-      grid[ii][jj].g = 120;
-      grid[ii][jj].b = 35;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 160;
+        grid[ii][jj].g = 120;
+        grid[ii][jj].b = 35;
+      }
     }
   }
   for (let ii = 6; ii < 11; ii++) {
     for (let jj = 41 + g; jj < 42 + g; jj++) {
       //grid[ii][jj].color=color(10, 10, 210);
-      grid[ii][jj].r = 160;
-      grid[ii][jj].g = 120;
-      grid[ii][jj].b = 35;
+      if (checkIfCellExsist(ii, jj)) {
+        grid[ii][jj].r = 160;
+        grid[ii][jj].g = 120;
+        grid[ii][jj].b = 35;
+      }
     }
   }
 }
