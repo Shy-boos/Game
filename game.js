@@ -3,23 +3,20 @@ var wojsko;
 var grid = [];
 var cell;
 var v = 3;
-var pozycja
-
+var pozycja;
 
 class cel {
-  constructor(i, j, r = 255, g = 255, b = 255) {
+  constructor(i, j, r = 200, g = 200, b = 200) {
     this.i = i;
     this.j = j;
     this.r = r;
     this.g = g;
     this.b = b;
-    this.color = color(this.r, this.g, this.b);
-    this.draw();
+    //this.draw();
   }
   draw() {
-    // stroke(0);
-    fill(this.color);
-    // fill(255);
+    stroke(0);
+    fill(this.r, this.g, this.b);
     rect(this.i, this.j, 10, 10);
   }
 }
@@ -35,7 +32,7 @@ class button {
   show() {
     if (this.active) fill(0, 255, 0, 200);
     else fill(255, 200);
-
+    stroke(0);
     rect(this.x, this.y, this.w, this.h);
   }
 }
@@ -82,24 +79,84 @@ function setup() {
     x = x + 1;
     y = 0;
   }
-}
 
+  for (let ii = 4; ii < 7; ii++) {
+    for (let jj = 4; jj < 6; jj++) {
+      //grid[ii][jj].color=color(10, 10, 210);
+      grid[ii][jj].r = 10;
+      grid[ii][jj].g = 10;
+      grid[ii][jj].b = 210;
+    }
+  }
 
-
-
-
-function draw() {
-  // background(255);
-  
-  
-  
-  
-  stroke(0);
   for (let x = 0; x < grid.length; x++) {
     // console.log(grid[x]);
     for (let y = 0; y < grid[x].length; y++) {
       grid[x][y].draw();
     }
+  }
+}
+
+function draw() {
+  // background(255);
+  stroke(0);
+  var x = wojsko.pozycjaX;
+  var y = wojsko.pozycjaY;
+
+  grid[x][y].r = 0;
+  grid[x][y].g = 255;
+  grid[x][y].b = 0;
+
+  grid[x][y].draw();
+  if (grid[x][y].r === 10 && grid[x][y].g === 10 && grid[x][y].b === 210) {
+    wojsko.spedMult = 0.007;
+    console.log("c");
+  } else {
+    wojsko.spedMult = 0.025;
+  }
+  if (x > 0) {
+    grid[x - 1][y].draw();
+  }
+  if (x < grid.length) grid[x + 1][y].draw();
+  if (x > 0 && y > 0) grid[x - 1][y - 1].draw();
+  if (y > 0) grid[x][y - 1].draw();
+  if (x < grid.length && y > 0) grid[x + 1][y - 1].draw();
+  if (x > 0 && y < grid[0].length) grid[x - 1][y + 1].draw();
+  if (x < grid.length && y < grid[0].length) {
+    grid[x + 1][y + 1].draw();
+  }
+  if (y < grid[0].length) {
+    grid[x][y + 1].draw();
+  }
+}
+
+function draw() {
+  // background(255);
+
+  stroke(0);
+  var x = wojsko.pozycjaX;
+  var y = wojsko.pozycjaY;
+
+  grid[x][y].draw();
+  if (grid[x][y].r === 10 && grid[x][y].g === 10 && grid[x][y].b === 210) {
+    wojsko.spedMult = 0.007;
+    console.log("c");
+  } else {
+    wojsko.spedMult = 0.025;
+  }
+  if (x > 0) {
+    grid[x - 1][y].draw();
+  }
+  if (x < grid.length) grid[x + 1][y].draw();
+  if (x > 0 && y > 0) grid[x - 1][y - 1].draw();
+  if (y > 0) grid[x][y - 1].draw();
+  if (x < grid.length && y > 0) grid[x + 1][y - 1].draw();
+  if (x > 0 && y < grid[0].length) grid[x - 1][y + 1].draw();
+  if (x < grid.length && y < grid[0].length) {
+    grid[x + 1][y + 1].draw();
+  }
+  if (y < grid[0].length) {
+    grid[x][y + 1].draw();
   }
 
   control();
@@ -107,88 +164,71 @@ function draw() {
   fill(0);
   noStroke();
   rect(wojsko.x, wojsko.y, 5, 5, 255);
-  
-  
-  
-  var x=wojsko.pozycjaX
- var y=wojsko.pozycjaY
-  
- 
-   if (colision(grid[x][y].i,grid[x][y].j,grid[x][y].i+10,grid[x][y].j+10,wojsko.x+2,wojsko.y+2)){
 
-   console.log(wojsko.x)
-   console.log(wojsko.y)
-} 
-else if (x>0){
-if (colision(grid[x-1][y].i,grid[x-1][y].j,grid[x-1][y].i+10,grid[x-1][y].j+10,wojsko.x+2,wojsko.y+2)){
-   if(wojsko.pozycjaX>0){
-   wojsko.pozycjaX=x-1}
-   console.log(wojsko.x)
-   console.log(wojsko.y)
-}
-} 
+  //console.log(x, y);
+  //
+  // Did Leave Cell?
+  //
+  if (
+    colision(
+      grid[x][y].i,
+      grid[x][y].j,
+      grid[x][y].i + 10,
+      grid[x][y].j + 10,
+      wojsko.x + 2,
+      wojsko.y + 2
+    )
+  ) {
+  } else {
+    //
+    // Kierunki
+    //
+    if (isGridColliding(x - 1, y, wojsko.x, wojsko.y)) {
+      // Left
+      wojsko.pozycjaX = x - 1;
+    } else if (isGridColliding(x + 1, y, wojsko.x, wojsko.y)) {
+      // Right
+      wojsko.pozycjaX = x + 1;
+    } else if (isGridColliding(x, y - 1, wojsko.x, wojsko.y)) {
+      // Top
+      wojsko.pozycjaY = y - 1;
+    } else if (isGridColliding(x, y + 1, wojsko.x, wojsko.y)) {
+      // Down
+      wojsko.pozycjaY = y + 1;
+    }
 
+    //
+    // Skosy
+    //
+    else if (isGridColliding(x - 1, y - 1, wojsko.x, wojsko.y)) {
+      // Left-Top
+      wojsko.pozycjaX = x - 1;
+      wojsko.pozycjaY = y - 1;
+    } else if (isGridColliding(x + 1, y - 1, wojsko.x, wojsko.y)) {
+      // Right-Top
+      wojsko.pozycjaX = x + 1;
+      wojsko.pozycjaY = y - 1;
+    } else if (isGridColliding(x - 1, y + 1, wojsko.x, wojsko.y)) {
+      // Left-Down
+      wojsko.pozycjaX = x - 1;
+      wojsko.pozycjaY = y + 1;
+    } else if (isGridColliding(x + 1, y + 1, wojsko.x, wojsko.y)) {
+      // Right-Down
+      wojsko.pozycjaX = x + 1;
+      wojsko.pozycjaY = y + 1;
+    }
 
-else if (colision(grid[x+1][y].i,grid[x+1][y].j,grid[x+1][y].i+10,grid[x+1][y].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaX=x+1
-   console.log(wojsko.x)
-   console.log(wojsko.y)
-
-} 
-else if (x>0 && y>0){
-if (colision(grid[x-1][y-1].i,grid[x-1][y-1].j,grid[x-1][y-1].i+10,grid[x-1][y-1].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaX=x-1
-   wojsko.pozycjaY=y-1
- console.log(wojsko.x)
-   console.log(wojsko.y)
-} }
-else if (y>0){
-if (colision(grid[x][y-1].i,grid[x][y-1].j,grid[x][y-1].i+10,grid[x][y-1].j+10,wojsko.x+2,wojsko.y+2)){
-      wojsko.pozycjaY=y-1
-console.log(wojsko.x)
-   console.log(wojsko.y)
-} }
-else if (y>0){
-if (colision(grid[x+1][y-1].i,grid[x+1][y-1].j,grid[x+1][y-1].i+10,grid[x+1][y-1].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaX=x+1
-   wojsko.pozycjaY=y-1
-console.log(wojsko.x)
-   console.log(wojsko.y)
-} }
-else if (x>0){
-if (colision(grid[x-1][y+1].i,grid[x-1][y+1].j,grid[x-1][y+1].i+10,grid[x-1][y+1].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaX=x-1
-   wojsko.pozycjaY=y+1
-console.log(wojsko.x)
-   console.log(wojsko.y)
-} }
-
-else if (colision(grid[x+1][y+1].i,grid[x+1][y+1].j,grid[x+1][y+1].i+10,grid[x+1][y+1].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaX=x+1
-   wojsko.pozycjaY=y+1
-console.log(wojsko.x)
-   console.log(wojsko.y)
-} 
-
-else if (colision(grid[x][y+1].i,grid[x][y+1].j,grid[x][y+1].i+10,grid[x][y+1].j+10,wojsko.x+2,wojsko.y+2)){
-   wojsko.pozycjaY=y+1
-console.log(wojsko.x)
-   console.log(wojsko.y)
-} 
-  
-  
-  
-}
+    //
+  }
+} // Draw
 
 class kropek {
   constructor() {
     this.x = 0;
     this.y = 0;
-    this.pozycjaX=0
-    this.pozycjaY=0
-    
-    
-    
+    this.pozycjaX = 0;
+    this.pozycjaY = 0;
+    this.spedMult = 0.025;
   }
 }
 
@@ -204,41 +244,46 @@ function control() {
     ) {
       buttons[i].active = true;
 
+      // Prędkość Wojska
+      // Wojska Przysipieszą gdy FPS jest mało
+      // zowlnią gdy jest ich dóżo
+      //let spedMult = 0.025; // Mnożnik Prędkości
+      let spedMult = wojsko.spedMult;
+      let speed = (1000 / frameRate()) * spedMult;
+
       if (i == 0) {
-        wojsko.x = wojsko.x + 1;
-        wojsko.y = wojsko.y - 1;
+        wojsko.x = wojsko.x + 1 * speed;
+        wojsko.y = wojsko.y - 1 * speed;
       } else if (i == 1) {
-        wojsko.y = wojsko.y - 1;
+        wojsko.y = wojsko.y - 1 * speed;
       } else if (i == 2) {
-        wojsko.x = wojsko.x - 1;
-        wojsko.y = wojsko.y - 1;
+        wojsko.x = wojsko.x - 1 * speed;
+        wojsko.y = wojsko.y - 1 * speed;
       } else if (i == 3) {
-        wojsko.x = wojsko.x + 1;
+        wojsko.x = wojsko.x + 1 * speed;
       } else if (i == 4) {
-        wojsko.x = wojsko.x - 0;
-        wojsko.y = wojsko.y + 0;
+        wojsko.x = wojsko.x - 0 * speed;
+        wojsko.y = wojsko.y + 0 * speed;
       } else if (i == 5) {
-        wojsko.x = wojsko.x - 1;
+        wojsko.x = wojsko.x - 1 * speed;
       } else if (i == 6) {
-        wojsko.x = wojsko.x + 1;
-        wojsko.y = wojsko.y + 1;
+        wojsko.x = wojsko.x + 1 * speed;
+        wojsko.y = wojsko.y + 1 * speed;
       } else if (i == 7) {
-        wojsko.y = wojsko.y + 1;
+        wojsko.y = wojsko.y + 1 * speed;
       } else if (i == 8) {
-        wojsko.x = wojsko.x - 1;
-        wojsko.y = wojsko.y + 1;
+        wojsko.x = wojsko.x - 1 * speed;
+        wojsko.y = wojsko.y + 1 * speed;
       }
     } else buttons[i].active = false;
   }
-
-  
 }
-function colision(Xmin, Ymin, Xmax, Ymax,pozX=mouseX,pozY=mouseY) {
-    if (Xmax > pozX && Xmin < pozX) {
-      if (Ymax > pozY && Ymin < pozY) {
-        return true;
-      }
-    } else {
-      return false;
+function colision(Xmin, Ymin, Xmax, Ymax, pozX = mouseX, pozY = mouseY) {
+  if (Xmax > pozX && Xmin < pozX) {
+    if (Ymax > pozY && Ymin < pozY) {
+      return true;
     }
+  } else {
+    return false;
   }
+}
